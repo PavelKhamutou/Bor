@@ -5,12 +5,17 @@ object Bor {
     val bor = Root
     /*bor.addWord("acoqwe")
     bor.addWord("rew")*/
-    bor.addWord("aqwe")
+    //bor.addWord("aqwe")
     bor.addWord("b")
     bor.addWord("c")
-    println(bor)
+    bor.addWord("ca")
+    bor.addWord("caa")
+    bor.addWord("carw")
+    bor.addWord("cqw")
+    bor.addWord("awed")
 
     println(bor)
+    //println(bor)
     println("buy")
   }
 

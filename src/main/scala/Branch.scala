@@ -1,10 +1,24 @@
 
 case class Branch(char: Char) {
+
   var nextNode: Node = _
-  def this(char: Char, tail: String){
+  var deepness = 0
+
+  def this(char: Char, tail: String, deepness: Int){
     this(char)
-    this.nextNode = new Node()
-    this.nextNode.addWord(tail)
+    this.deepness = deepness
+    if(tail.isEmpty) this.nextNode = new TailNode()
+    else {
+      this.nextNode = new ChainNode(deepness + 1)
+      this.nextNode.addWord(tail)
+    }
   }
-  override def toString = char + " -> " + { if(nextNode == null) "$\n" else nextNode }
+
+  def changeNode(tail: String) = {
+    nextNode = new ChainNode(deepness + 1)
+    nextNode.addWord(tail)
+  }
+
+  override def toString = char + " -> " + nextNode
+
 }
