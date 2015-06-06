@@ -1,8 +1,10 @@
 
-class Branch(val c: Char, tail: String) {
-  val nextNode = if(!tail.isEmpty) new Node(this, tail) else '$'
-
-
-  def getName = c
-  override def toString = "" + c + " -> " + nextNode
+case class Branch(char: Char) {
+  var nextNode: Node = _
+  def this(char: Char, tail: String){
+    this(char)
+    this.nextNode = new Node()
+    this.nextNode.addWord(tail)
+  }
+  override def toString = char + " -> " + { if(nextNode == null) "$\n" else nextNode }
 }

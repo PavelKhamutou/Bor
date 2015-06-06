@@ -1,26 +1,16 @@
 
 object Root {
 
-  val branchMap = scala.collection.mutable.Map[Char, Branch]()
-  val branchSet = scala.collection.mutable.Set[Branch]()
-
+  val branchArray = scala.collection.mutable.ArrayBuffer[Branch]()
   def addWord(word: String): Unit = {
-    if(!checkBranch(word.head))
-      branchSet += new Branch(word.head, word.tail)
-    else {
-      val i = branchSet.filter(_.getName == word.head)
-
+    val index = branchArray.indexOf(new Branch(word.head))
+    if(index == -1){
+      if(!word.tail.isEmpty) branchArray += new Branch(word.head, word.tail) else branchArray += new Branch(word.head)
+    }
+    else{
+      if(!word.tail.isEmpty) branchArray(index).nextNode.addWord(word.tail)
     }
   }
 
-
-  private def checkBranch(c: Char): Boolean = {
-    branchMap.contains(c)
-  }
-
-  //override def toString = branchSet.head.nextNode
-  def printAll = {
-    branchSet.toArray.foreach(println)
-  }
-
+  override def toString = branchArray.mkString("")
 }

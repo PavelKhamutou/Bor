@@ -1,14 +1,19 @@
 
-class Node(rootBranch: Branch, word: String) {
-  val branchMap = scala.collection.mutable.Map[Char, Branch]()
-  val branchSet = scala.collection.mutable.Set[Branch]()
-  addBranch()
-  def addBranch(): Unit = {
-    /*if(word.tail.isEmpty) branchMap.put('$', new Branch('$', ""))
-    else branchMap.put(word.head, new Branch(word.head, word.tail))
-  */
-    branchSet += new Branch(word.head, word.tail)
-  }
+class Node() {
+  val branchArray = scala.collection.mutable.ArrayBuffer[Branch]()
+  
+  def addWord(word: String): Unit = {
 
-  override def toString = branchSet.toString
+    val index = branchArray.indexOf(new Branch(word.head))
+    if(index == -1){
+      if(!word.tail.isEmpty) branchArray += new Branch(word.head, word.tail) else branchArray += new Branch(word.head)
+    }
+    else{
+      val n = branchArray(index)
+      if(n.nextNode != null) n.nextNode.addWord(word.tail) //доделать часть когда все слово совподает.
+    }
+  }
+  override def toString = branchArray.mkString(" ")
 }
+
+
